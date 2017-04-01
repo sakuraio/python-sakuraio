@@ -1,11 +1,10 @@
-import smbus
-
 from sakuraio.hardware.base import SAKURAIO_SLAVE_ADDR, SakuraIOBase
 
 
 class SakuraIOSMBus(SakuraIOBase):
 
     def __init__(self):
+        import smbus
         self.bus = smbus.SMBus(1)
 
     def start(self, write=True):
@@ -18,7 +17,7 @@ class SakuraIOSMBus(SakuraIOBase):
             self.response = self.bus.read_i2c_block_data(SAKURAIO_SLAVE_ADDR, 32)
 
     def send_byte(self, value):
-            self.request.append(value)
+        self.request.append(value)
 
     def recv_byte(self):
         value = 0x00
@@ -26,8 +25,7 @@ class SakuraIOSMBus(SakuraIOBase):
             value = self.response.pop(0)
         return value
 
+
 class SakuraIOSPI(SakuraIOBase):
     def __init__(self):
         raise NotImplementedError()
-
-

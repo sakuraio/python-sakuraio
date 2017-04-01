@@ -21,7 +21,7 @@ class CommonMixins(object):
     def get_datetime(self):
         response = self.execute_command(CMD_GET_DATETIME, as_bytes=True)
         unixtime, = struct.unpack("<Q", response)
-        return datetime.datetime.fromtimestamp(unixtime/1000.0)
+        return datetime.datetime.utcfromtimestamp(unixtime / 1000.0)
 
     def echoback(self, values):
         response = self.execute_command(CMD_ECHO_BACK, values)

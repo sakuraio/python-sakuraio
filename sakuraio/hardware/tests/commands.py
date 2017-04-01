@@ -20,9 +20,9 @@ class CommandTest(unittest.TestCase):
         return sakuraio
 
     def test_get_datetime(self):
-        sakuraio = self._initial(0x01, [232, 143, 222, 88, 0, 0, 0, 0])
+        sakuraio = self._initial(0x01, [48, 78, 218, 39, 91, 1, 0, 0])
         # 2017-04-01 02:20:40
-        self.assertEqual(sakuraio.get_datetime(), datetime.datetime(2017, 4, 1, 2, 20, 40))
+        self.assertEqual(sakuraio.get_datetime(), datetime.datetime(2017, 4, 1, 4, 51, 10))
         self.assertEqual(sakuraio.values, [CMD_GET_DATETIME, 0, CMD_GET_DATETIME])
 
     def test_echoback(self):
