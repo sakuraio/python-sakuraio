@@ -4,6 +4,7 @@ import struct
 from sakuraio.hardware.commands import CommandMixins, CMD_ERROR_NONE
 from sakuraio.hardware.exceptions import CommandError, ParityError
 
+SAKURAIO_SLAVE_ADDR = 0x4f
 
 def culc_parity(values):
     parity = 0x00
@@ -15,10 +16,10 @@ def culc_parity(values):
 class SakuraIOBase(CommandMixins):
 
     def start(self, write=True):
-        raise NotImplementedError()
+        return
 
     def end(self):
-        raise NotImplementedError()
+        return
 
     def send_byte(self, value):
         raise NotImplementedError()
