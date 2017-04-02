@@ -1,5 +1,7 @@
 # Python library for SakuraIO
 
+**WARNING: This library is under development with destructive changes.**
+
 ## For Sakrura Communication Module
 
 Currently supports I2C (SMBus) ONLY.
