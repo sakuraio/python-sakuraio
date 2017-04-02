@@ -3,18 +3,18 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to python-sakuraio's documentation!
+python-sakuraio
 ===========================================
 
+Python-sakuraio is a library for IoT PaaS of SAKURA Internet Inc.
+It allows users to connect to the Sakura Communication Modules,
+and APIs of the platform.
+
+
 .. toctree::
-   :maxdepth: 2
-   :caption: Contents:
+    :maxdepth: 2
+    :caption: for Hardware
 
-
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
+    hardware/install
+    hardware/usage
+    hardware/api
