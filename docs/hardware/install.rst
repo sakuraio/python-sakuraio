@@ -5,7 +5,10 @@ Python-sakuraio can be installed from Github.com with tools like ``pip``:
 
 .. code-block:: bash
 
-    $ pip install -e git+https://github.com/sakura-internet/python-sakuraio.git#egg=python-sakuraio
+    # From PyPi
+    $ pip install sakuraio
+    # From Github.com
+    $ pip install -e git+https://github.com/sakura-internet/python-sakuraio.git#egg=sakuraio
 
 
 Requirements
