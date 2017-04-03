@@ -27,7 +27,7 @@ It currently supports I2C (SMBus) ONLY, and tested with Raspberry Pi.
 
 ### Requirements
 
-* Python >= 3.5
+* Python >= 3.4
 * python3-smbus (for I2C)
 
 
