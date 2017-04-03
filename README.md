@@ -2,9 +2,27 @@
 
 **WARNING: This library is under development with destructive changes.**
 
-## For Sakrura Communication Module
+## Overview
 
-Currently supports I2C (SMBus) ONLY.
+This library contains two functions.
+One is to connect to Sakura Communication Modules (for Hardware).
+Onother one is to connect to Platform API in https://api.sakura.ad.jp/ (for Service).
+
+
+## Documentation
+
+For API documentation, usage and examples see files in the `"./doc"`
+directory.  The ".rst" files can be read in any text editor or being converted to
+HTML or PDF using [Sphinx](http://sphinx-doc.org/). An HTML version is online at
+
+[![Docs](https://readthedocs.org/projects/python-sakuraio/badge/?version=latest)](http://python-sakuraio.readthedocs.io/)
+
+http://python-sakuraio.readthedocs.io/
+
+
+## For Hardware
+
+It currently supports I2C (SMBus) ONLY, and tested with Raspberry Pi.
 
 
 ### Requirements
