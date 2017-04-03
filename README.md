@@ -1,4 +1,4 @@
-# Python library for SakuraIO
+# Python library for SakuraIO ![travis-ci](https://travis-ci.org/sakura-internet/python-sakuraio.svg?branch=master)
 
 **WARNING: This library is under development with destructive changes.**
 
