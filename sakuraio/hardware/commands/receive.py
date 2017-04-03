@@ -11,6 +11,12 @@ CMD_RX_CLEAR = 0x33
 class ReceiveMixins(object):
 
     def dequeue_rx_raw(self):
+        """Dequeue received data
+
+        :return: Dict of received data.
+        :rtype: dict
+        """
+
         response = self.execute_command(CMD_RX_DEQUEUE)
         return {
             "channel": response[0],
@@ -20,6 +26,12 @@ class ReceiveMixins(object):
         }
 
     def peek_rx_raw(self):
+        """Peek received data
+
+        :return: Dict of received data.
+        :rtype: dict
+        """
+
         response = self.execute_command(CMD_RX_PEEK)
         return {
             "channel": response[0],
@@ -29,6 +41,12 @@ class ReceiveMixins(object):
         }
 
     def get_rx_queue_length(self):
+        """Get available and queued length of receive queue.
+
+        :return: Size of available and queued data.
+        :rtype: dict
+        """
+
         response = self.execute_command(CMD_RX_LENGTH)
         return {
             "available": response[0],
@@ -36,4 +54,6 @@ class ReceiveMixins(object):
         }
 
     def clear_rx(self):
+        """Clear receive queue."""
+
         self.execute_command(CMD_RX_CLEAR)

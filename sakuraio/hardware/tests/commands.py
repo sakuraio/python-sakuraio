@@ -34,12 +34,12 @@ class CommandTest(unittest.TestCase):
     def test_get_adc(self):
         values = [0x54, 0x0b, 0x00, 0x00]
         sakuraio = self._initial(0x01, values)
-        self.assertEqual(sakuraio.get_adc(1), 2900)
+        self.assertEqual(sakuraio.get_adc(1), 290.0)
         self.assertEqual(sakuraio.values, [CMD_READ_ADC, 1, 1, 16])
 
         values = [0x54, 0x0b, 0x00, 0x00]
         sakuraio = self._initial(0x01, values)
-        self.assertEqual(sakuraio.get_adc(2), 2900)
+        self.assertEqual(sakuraio.get_adc(2), 290.0)
         self.assertEqual(sakuraio.values, [CMD_READ_ADC, 1, 2, 19])
 
     def test_enqueue_tx_raw(self):
@@ -52,9 +52,9 @@ class CommandTest(unittest.TestCase):
         sakuraio.enqueue_tx_raw(1, "i", [0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08], -4321)
         self.assertEqual(sakuraio.values, [CMD_TX_ENQUEUE, 18, 1, 105, 1, 2, 3, 4, 5, 6, 7, 8, 31, 239, 255, 255, 255, 255, 255, 255, 162])
 
-    def test_enqueue_tx_immediate_raw(self):
+    def test_send_immediate_raw(self):
         sakuraio = self._initial(0x01, [])
-        sakuraio.enqueue_tx_immediate_raw(1, "i", [0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08])
+        sakuraio.send_immediate_raw(1, "i", [0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08])
         self.assertEqual(sakuraio.values, [CMD_TX_SENDIMMED, 10, 1, 105, 1, 2, 3, 4, 5, 6, 7, 8, 75])
 
     def test_get_tx_queue_length(self):
@@ -100,6 +100,15 @@ class CommandTest(unittest.TestCase):
     def test_get_product_id(self):
         sakuraio = self._initial(0x01, [0x02, 0x00])
         self.assertEqual(sakuraio.get_product_id(), 2)
+        self.assertEqual(sakuraio.values, [CMD_GET_PRODUCT_ID, 0, CMD_GET_PRODUCT_ID])
+
+    def test_get_product_name(self):
+        sakuraio = self._initial(0x01, [0x01, 0x00])
+        self.assertEqual(sakuraio.get_product_name(), "SCM-LTE-BETA")
+        self.assertEqual(sakuraio.values, [CMD_GET_PRODUCT_ID, 0, CMD_GET_PRODUCT_ID])
+
+        sakuraio = self._initial(0x01, [0x02, 0x00])
+        self.assertEqual(sakuraio.get_product_name(), "SCM-LTE-01")
         self.assertEqual(sakuraio.values, [CMD_GET_PRODUCT_ID, 0, CMD_GET_PRODUCT_ID])
 
     def test_get_unique_id(self):
