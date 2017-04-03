@@ -33,8 +33,13 @@ It currently supports I2C (SMBus) ONLY, and tested with Raspberry Pi.
 
 ### Install
 
+
+
 ```bash
-sudo pip3 install -e git+https://github.com/sakura-internet/python-sakuraio.git#egg=python-sakuraio
+# From PyPi
+sudo pip3 install sakuraio
+# From Github.com
+sudo pip3 install -e git+https://github.com/sakura-internet/python-sakuraio.git#egg=sakuraio
 ```
 
 ### Example
