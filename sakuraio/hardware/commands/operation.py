@@ -80,10 +80,10 @@ class OperationMixins(object):
         """
 
         response = self.execute_command(CMD_GET_FIRMWARE_UPDATE_STATUS)[0]
-        has_error = (response & 0x80) == 0x80
+        inprogress = (response & 0x80) == 0x80
         return {
-            "has_error": has_error,
-            "status": response & 0x7f,
+            "inprogress": inprogress,
+            "error": response & 0x7f,
         }
 
     def reset(self):
