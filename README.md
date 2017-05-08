@@ -6,13 +6,13 @@
 
 This library contains two functions.
 One is to connect to Sakura Communication Modules (for Hardware).
-Onother one is to connect to Platform API in https://api.sakura.ad.jp/ (for Service).
+Onother one is to connect to Platform API in https://api.sakura.io/ (for Service).
 
 
 ## Documentation
 
 For API documentation, usage and examples see files in the `"./doc"`
-directory.  The ".rst" files can be read in any text editor or being converted to
+directory.  The `".rst"` files can be read in any text editor or being converted to
 HTML or PDF using [Sphinx](http://sphinx-doc.org/). An HTML version is online at
 
 [![Docs](https://readthedocs.org/projects/python-sakuraio/badge/?version=latest)](http://python-sakuraio.readthedocs.io/)
