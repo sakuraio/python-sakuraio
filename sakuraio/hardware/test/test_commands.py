@@ -133,11 +133,11 @@ class CommandTest(unittest.TestCase):
 
     def test_get_firmware_update_status(self):
         sakuraio = self._initial(0x01, [0x04])
-        self.assertEqual(sakuraio.get_firmware_update_status(), {'has_error': False, 'status': 0x04})
+        self.assertEqual(sakuraio.get_firmware_update_status(), {'inprogress': False, 'error': 0x04})
         self.assertEqual(sakuraio.values, [CMD_GET_FIRMWARE_UPDATE_STATUS, 0, CMD_GET_FIRMWARE_UPDATE_STATUS])
 
-        sakuraio = self._initial(0x01, [0x83])
-        self.assertEqual(sakuraio.get_firmware_update_status(), {'has_error': True, 'status': 0x03})
+        sakuraio = self._initial(0x01, [0x80])
+        self.assertEqual(sakuraio.get_firmware_update_status(), {'inprogress': True, 'error': 0x00})
         self.assertEqual(sakuraio.values, [CMD_GET_FIRMWARE_UPDATE_STATUS, 0, CMD_GET_FIRMWARE_UPDATE_STATUS])
 
     def test_reset(self):
