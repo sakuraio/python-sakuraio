@@ -1,5 +1,7 @@
 # PyPi
 
+Change version in `setup.py`.
+
 ## Testing
 
 ```bash
