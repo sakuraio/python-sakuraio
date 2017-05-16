@@ -8,7 +8,7 @@ Python-sakuraio can be installed from Github.com with tools like ``pip``:
     # From PyPi
     $ pip install sakuraio
     # From Github.com
-    $ pip install -e git+https://github.com/sakura-internet/python-sakuraio.git#egg=sakuraio
+    $ pip install -e git+https://github.com/sakuraio/python-sakuraio.git#egg=sakuraio
 
 
 Requirements
@@ -31,4 +31,4 @@ __ https://www.raspberrypi.org/downloads/raspbian/
 .. code-block:: bash
 
     $ sudo apt-get install python3 python3-pip python3-smbus
-    $ pip3 install -e git+https://github.com/sakura-internet/python-sakuraio.git#egg=sakuraio
+    $ pip3 install -e git+https://github.com/sakuraio/python-sakuraio.git#egg=sakuraio

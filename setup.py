@@ -8,7 +8,7 @@ setup(
     description='Python SakuraIO Library',
     author='chibiegg',
     author_email='chibiegg@chibiegg.net',
-    url='https://github.com/sakura-internet/python-sakuraio/',
+    url='https://github.com/sakuraio/python-sakuraio/',
     packages=['sakuraio', 'sakuraio.hardware', 'sakuraio.hardware.commands', 'sakuraio.hardware.rpi'],
     classifiers=[
         # How mature is this project? Common values are
