@@ -1,4 +1,4 @@
-# Python library for SakuraIO ![travis-ci](https://travis-ci.org/sakura-internet/python-sakuraio.svg?branch=master)
+# Python library for SakuraIO ![travis-ci](https://travis-ci.org/sakuraio/python-sakuraio.svg?branch=master)
 
 **WARNING: This library is under development with destructive changes.**
 
@@ -39,7 +39,7 @@ It currently supports I2C (SMBus) ONLY, and tested with Raspberry Pi.
 # From PyPi
 sudo pip3 install sakuraio
 # From Github.com
-sudo pip3 install -e git+https://github.com/sakura-internet/python-sakuraio.git#egg=sakuraio
+sudo pip3 install -e git+https://github.com/sakuraio/python-sakuraio.git#egg=sakuraio
 ```
 
 ### Example
