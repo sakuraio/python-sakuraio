@@ -6,7 +6,7 @@
 
 This library contains two functions.
 One is to connect to Sakura Communication Modules (for Hardware).
-Onother one is to connect to Platform API in https://api.sakura.io/ (for Service).
+Another one is to connect to Platform API in https://api.sakura.io/ (for Service).
 
 
 ## Documentation
@@ -29,11 +29,9 @@ It currently supports I2C (SMBus) ONLY, and tested with Raspberry Pi.
 
 * Python >= 3.4
 * python3-smbus (for I2C)
-
+* python3-rpi.gpio (for GPIO on Raspberry Pi)
 
 ### Install
-
-
 
 ```bash
 # From PyPi
@@ -44,12 +42,24 @@ sudo pip3 install -e git+https://github.com/sakuraio/python-sakuraio.git#egg=sak
 
 ### Example
 
+#### I2C (SMBus)
+
 ```python
 from sakuraio.hardware.rpi import SakuraIOSMBus
 
 sakuraio = SakuraIOSMBus()
 print(sakuraio.get_unique_id())
 ```
+
+#### SPI (GPIO)
+
+```python
+from sakuraio.hardware.rpi import SakuraIOGPIO
+
+sakuraio = SakuraIOGPIO()
+print(sakuraio.get_unique_id())
+```
+
 
 #### output
 
