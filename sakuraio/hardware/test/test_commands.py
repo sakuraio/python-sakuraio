@@ -2,7 +2,7 @@ import unittest
 from unittest import mock
 import datetime
 
-from sakuraio.hardware.base import culc_parity
+from sakuraio.hardware.base import calc_parity
 from sakuraio.hardware.commands import *
 from sakuraio.hardware.dummy import DummySakuraIO
 from sakuraio.hardware.exceptions import CommandError, ParityError
@@ -12,7 +12,7 @@ class CommandTest(unittest.TestCase):
 
     def _initial(self, status, response):
         payload = [status, len(response)] + response
-        payload.append(culc_parity(payload))
+        payload.append(calc_parity(payload))
 
         sakuraio = DummySakuraIO()
         sakuraio.initial(payload)
