@@ -1,5 +1,4 @@
 import unittest
-from unittest import mock
 
 from sakuraio.hardware.base import calc_parity
 from sakuraio.hardware.dummy import DummySakuraIO
