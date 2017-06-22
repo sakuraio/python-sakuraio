@@ -1,7 +1,7 @@
 import unittest
 from unittest import mock
 
-from sakuraio.hardware.base import culc_parity
+from sakuraio.hardware.base import calc_parity
 from sakuraio.hardware.dummy import DummySakuraIO
 from sakuraio.hardware.exceptions import CommandError, ParityError
 
@@ -9,11 +9,11 @@ from sakuraio.hardware.exceptions import CommandError, ParityError
 class SakuraIOBaseTest(unittest.TestCase):
 
     def test_parity(self):
-        self.assertEqual(culc_parity([0x00]), 0x00)
-        self.assertEqual(culc_parity([0x24]), 0x24)
-        self.assertEqual(culc_parity([0x00, 0x24]), 0x24)
-        self.assertEqual(culc_parity([0x24, 0x24]), 0x00)
-        self.assertEqual(culc_parity([0x00, 0x01, 0xa2, 0x33]), 0x90)
+        self.assertEqual(calc_parity([0x00]), 0x00)
+        self.assertEqual(calc_parity([0x24]), 0x24)
+        self.assertEqual(calc_parity([0x00, 0x24]), 0x24)
+        self.assertEqual(calc_parity([0x24, 0x24]), 0x00)
+        self.assertEqual(calc_parity([0x00, 0x01, 0xa2, 0x33]), 0x90)
 
     def _execute_command(self, cmd, request, response, as_bytes=False):
         base = DummySakuraIO()
@@ -25,10 +25,10 @@ class SakuraIOBaseTest(unittest.TestCase):
 
         cmd = 0x10
         request = [0x01, 0x02, 0x03, 0x04]
-        request.append(culc_parity(request))
+        request.append(calc_parity(request))
 
         response = [0x01, 0x04, 0x11, 0x12, 0x13, 0x14]
-        response.append(culc_parity(response))
+        response.append(calc_parity(response))
 
         expected = response[2:-1]
 
@@ -39,11 +39,11 @@ class SakuraIOBaseTest(unittest.TestCase):
 
         cmd = 0x10
         request = [0x01, 0x02, 0x03, 0x04]
-        request.append(culc_parity(request))
+        request.append(calc_parity(request))
 
         status = 0x02
         response = [status, 0x00]
-        response.append(culc_parity(response))
+        response.append(calc_parity(response))
 
         with self.assertRaises(CommandError):
             self._execute_command(cmd, request, response)
@@ -53,7 +53,7 @@ class SakuraIOBaseTest(unittest.TestCase):
 
         cmd = 0x10
         request = [0x01, 0x02, 0x03, 0x04]
-        request.append(culc_parity(request))
+        request.append(calc_parity(request))
 
         status = 0x01
         response = [status, 0x00]

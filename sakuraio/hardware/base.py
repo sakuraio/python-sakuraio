@@ -6,7 +6,7 @@ from sakuraio.hardware.exceptions import CommandError, ParityError
 
 SAKURAIO_SLAVE_ADDR = 0x4f
 
-def culc_parity(values):
+def calc_parity(values):
     parity = 0x00
     for value in values:
         parity ^= value
@@ -31,7 +31,7 @@ class SakuraIOBase(CommandMixins):
         response = []
 
         request = [cmd, len(request)] + request
-        request.append(culc_parity(request))
+        request.append(calc_parity(request))
 
         try:
             # Request
@@ -51,7 +51,7 @@ class SakuraIOBase(CommandMixins):
                 response.append(self.recv_byte())
             parity = self.recv_byte()
 
-            if parity != culc_parity([status, length] + response):
+            if parity != calc_parity([status, length] + response):
                 raise ParityError()
 
         except:
