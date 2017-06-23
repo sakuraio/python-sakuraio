@@ -35,7 +35,17 @@ class TransmitMixins(object):
 
         request = [channel, ord(type)] + values[:8]
         if offset != 0:
-            request += struct.pack("<q", offset)
+            offset_value = struct.pack("<q", offset)
+
+            if isinstance(offset_value, str):
+                # For Python2
+                for v in offset_value:
+                    request.append(ord(v))
+            elif isinstance(offset_value, bytes):
+                # For Python3
+                request += offset_value
+            else:
+                TypeError()
 
         self.execute_command(CMD_TX_ENQUEUE, request)
 
