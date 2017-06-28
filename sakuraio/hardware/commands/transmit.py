@@ -1,6 +1,8 @@
 import struct
 import datetime
 
+from sakuraio.hardware.utils import pack
+
 # Transmit
 CMD_TX_ENQUEUE = 0x20
 CMD_TX_SENDIMMED = 0x21
@@ -35,17 +37,7 @@ class TransmitMixins(object):
 
         request = [channel, ord(type)] + values[:8]
         if offset != 0:
-            offset_value = struct.pack("<q", offset)
-
-            if isinstance(offset_value, str):
-                # For Python2
-                for v in offset_value:
-                    request.append(ord(v))
-            elif isinstance(offset_value, bytes):
-                # For Python3
-                request += offset_value
-            else:
-                TypeError()
+            request += pack("<q", offset)
 
         self.execute_command(CMD_TX_ENQUEUE, request)
 

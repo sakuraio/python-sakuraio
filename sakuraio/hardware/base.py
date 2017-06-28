@@ -6,6 +6,7 @@ from sakuraio.hardware.exceptions import CommandError, ParityError
 
 SAKURAIO_SLAVE_ADDR = 0x4f
 
+
 def calc_parity(values):
     parity = 0x00
     for value in values:
