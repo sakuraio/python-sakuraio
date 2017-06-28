@@ -24,8 +24,15 @@ http://python-sakuraio.readthedocs.io/
 
 It currently supports I2C (SMBus) ONLY, and tested with Raspberry Pi.
 
-
 ### Requirements
+
+#### Python2
+
+* Python = 2.7
+* python-smbus (for I2C)
+* python-rpi.gpio (for GPIO on Raspberry Pi)
+
+#### Python3
 
 * Python >= 3.4
 * python3-smbus (for I2C)
@@ -35,9 +42,9 @@ It currently supports I2C (SMBus) ONLY, and tested with Raspberry Pi.
 
 ```bash
 # From PyPi
-sudo pip3 install sakuraio
+sudo pip install sakuraio
 # From Github.com
-sudo pip3 install -e git+https://github.com/sakuraio/python-sakuraio.git#egg=sakuraio
+sudo pip install -e git+https://github.com/sakuraio/python-sakuraio.git#egg=sakuraio
 ```
 
 ### Example
