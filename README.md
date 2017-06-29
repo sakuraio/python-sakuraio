@@ -40,6 +40,8 @@ It currently supports I2C (SMBus) ONLY, and tested with Raspberry Pi.
 
 ### Install
 
+If you want to use python3 it may be required replace `pip` to `pip3`.
+
 ```bash
 # From PyPi
 sudo pip install sakuraio
