@@ -1,5 +1,4 @@
 import unittest
-from unittest import mock
 import datetime
 
 from sakuraio.hardware.base import calc_parity
