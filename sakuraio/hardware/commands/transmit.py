@@ -1,7 +1,7 @@
 import struct
 import datetime
 
-from sakuraio.hardware.utils import pack
+from .utils import pack
 
 # Transmit
 CMD_TX_ENQUEUE = 0x20
