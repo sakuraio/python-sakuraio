@@ -78,3 +78,51 @@ class SakuraIOGPIO(SakuraIOBase):
 class SakuraIOSPI(SakuraIOBase):
     def __init__(self):
         raise NotImplementedError()
+
+
+class SakuraIOSerial(SakuraIOBase):
+
+    def __init__(self, port, baudrate=115200):
+        import serial
+        self.serial = serial.Serial(port, baudrate, timeout=1)
+
+    def __del__(self):
+        self.serial.close()
+
+    def readline(self):
+        line = ""
+        while True:
+            c = self.serial.read().decode("ascii")
+            if not c:
+                return line
+
+            if c not in ("\r", "\n"):
+                line += c
+            elif len(line) > 0:
+                return line
+
+    def start(self, write=True):
+        if write:
+            self.request = "AT*CMD="
+            self.response = []
+        else:
+            self.serial.write((self.request + "\n").encode("ascii", "ignore"))
+            while True:
+                line = self.readline()
+                if not line:
+                    return
+                if line.startswith("*CMD:"):
+                    response_hex = line[5:]
+                    while response_hex:
+                        self.response.append(int("0x" + response_hex[:2], 0))
+                        response_hex = response_hex[2:]
+                    return
+
+    def send_byte(self, value):
+        self.request += "{0:02X}".format(value)
+
+    def recv_byte(self):
+        value = 0x00
+        if self.response:
+            value = self.response.pop(0)
+        return value
