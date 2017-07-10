@@ -1,5 +1,4 @@
 from .common import *
-from .io import *
 from .transmit import *
 from .receive import *
 from .file import *
@@ -15,5 +14,5 @@ CMD_ERROR_LOCKED = 0x06
 CMD_ERROR_BUSY = 0x07
 
 
-class CommandMixins(CommonMixins, IOMixins, TransmitMixins, ReceiveMixins, OperationMixins, FileMixins):
+class CommandMixins(CommonMixins, TransmitMixins, ReceiveMixins, OperationMixins, FileMixins):
     pass
