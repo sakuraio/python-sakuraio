@@ -61,16 +61,6 @@ def get_file_via_sakuraio(channel):
             receivedsize += len(result["data"])
             print('Get_file_data: Length: {0}'.format(len(result["data"])))
             print('Get_file_data: Receivedsize: {0}'.format(receivedsize))
-        '''
-        try:
-            response = sakuraio.get_file_download_status()
-        except:
-            print('Get_file_download_status: Error')
-            raise
-        else:
-            print('Get_file_download_status: Status: {0:x}'.format(response["status"]))
-            print('Get_file_download_status: Receivedsize: {0}'.format(response["size"]))
-        '''
 
     #print('Get_file_data: Received_data: {0}'.format(filedata))
 
