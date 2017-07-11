@@ -29,9 +29,9 @@ class SakuraIOClient(APIMixins):
         :return: API response (format JSON)
         """
         headers = {}
-        headers["Accept"] = 'application/json'
+        headers['Accept'] = 'application/json'
         auth = (self.api_token, self.api_secret)
-        _url = self.base_url + path
+        _url = self.base_url + path + '/'
 
         method = method.lower()
         response = None
@@ -43,15 +43,19 @@ class SakuraIOClient(APIMixins):
                 auth=auth
                 )
         elif method == 'post':
+            headers['Content-Type'] = 'application/json'
             response = requests.post(
                 _url,
                 params=query_params,
-                data=request_params,
+                json=request_params,
                 headers=headers,
                 auth=auth
                 )
         else:
             raise Exception('[ERROR] Unsupported Method')
+
+        if response.status_code >= 400:
+            raise Exception(response, response.text)
 
         return response.json()
 
