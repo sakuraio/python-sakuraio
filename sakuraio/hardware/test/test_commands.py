@@ -30,17 +30,6 @@ class CommandTest(unittest.TestCase):
         self.assertEqual(sakuraio.echoback(values), values)
         self.assertEqual(sakuraio.values, [CMD_ECHO_BACK, 8, 232, 143, 222, 88, 0, 0, 0, 0, 230])
 
-    def test_get_adc(self):
-        values = [0x54, 0x0b, 0x00, 0x00]
-        sakuraio = self._initial(0x01, values)
-        self.assertEqual(sakuraio.get_adc(1), 290.0)
-        self.assertEqual(sakuraio.values, [CMD_READ_ADC, 1, 1, 16])
-
-        values = [0x54, 0x0b, 0x00, 0x00]
-        sakuraio = self._initial(0x01, values)
-        self.assertEqual(sakuraio.get_adc(2), 290.0)
-        self.assertEqual(sakuraio.values, [CMD_READ_ADC, 1, 2, 19])
-
     def test_enqueue_tx_raw(self):
         sakuraio = self._initial(0x01, [])
         sakuraio.enqueue_tx_raw(1, "i", [0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08])
