@@ -71,7 +71,10 @@ class SakuraIOClient(APIMixins):
 
         if response.status_code >= 400:
             raise Exception(response, response.text)
-        print(response.text)
+
+        if response.status_code == 204:
+            # 204 NO_CONTENT is blank response
+            return None
 
         return response.json()
 
