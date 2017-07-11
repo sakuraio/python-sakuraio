@@ -43,3 +43,13 @@ Operation
 .. automethod:: hardware.commands.operation.OperationMixins.update_firmware()
 .. automethod:: hardware.commands.operation.OperationMixins.get_firmware_update_status()
 .. automethod:: hardware.commands.operation.OperationMixins.reset()
+
+
+File
+----
+
+.. automethod:: hardware.commands.file.FileMixins.start_file_download(fileid)
+.. automethod:: hardware.commands.file.FileMixins.get_file_metadata()
+.. automethod:: hardware.commands.file.FileMixins.get_file_download_status()
+.. automethod:: hardware.commands.file.FileMixins.cancel_file_download()
+.. automethod:: hardware.commands.file.FileMixins.get_file_data(rsize)
