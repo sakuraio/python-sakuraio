@@ -12,12 +12,6 @@ Common
 .. automethod:: hardware.commands.common.CommonMixins.echoback()
 
 
-IO
---
-
-.. automethod:: hardware.commands.io.IOMixins.get_adc(channel)
-
-
 Transmit
 --------
 

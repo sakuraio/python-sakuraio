@@ -60,6 +60,13 @@ sakuraio = SakuraIOSMBus()
 print(sakuraio.get_unique_id())
 ```
 
+*NOTE*
+
+DO NOT update linux kernel from `Linux raspberrypi 4.4.50-v7+`.
+
+It is reported that `OSError: [Errno 121] Remote I/O error` occurs with later version.
+
+
 #### SPI (GPIO)
 
 ```python
