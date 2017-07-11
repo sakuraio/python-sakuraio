@@ -1,6 +1,4 @@
-import sys
-import urllib2
-import urlparse
+import requests
 
 
 class SakuraIOClient(object):
@@ -10,7 +8,7 @@ class SakuraIOClient(object):
 
     def __init__(self, api_token, api_secret, base_url=None):
         if api_token is None or api_secret is None:
-            sys.stderr.write('[ERROR] must set api_token and api_secret')
+            Exception('[ERROR] must set api_token and api_secret')
 
         self.api_token = api_token
         self.api_secret = api_secret
@@ -28,6 +26,6 @@ class SakuraIOClient(object):
         method = method.lower()
         response = None
         if method == 'get':
-            response = urllib2.request.urlopen(_url, params=query_params)
+            response = requests.get(_url, params=query_params)
 
         return response.json()
