@@ -32,6 +32,7 @@ class SakuraIOClient(APIMixins):
         headers['Accept'] = 'application/json'
         auth = (self.api_token, self.api_secret)
         _url = self.base_url + path + '/'
+        _url = _url.format(**url_params)
 
         method = method.lower()
         response = None
@@ -70,6 +71,7 @@ class SakuraIOClient(APIMixins):
 
         if response.status_code >= 400:
             raise Exception(response, response.text)
+        print(response.text)
 
         return response.json()
 
