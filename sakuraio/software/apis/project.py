@@ -1,0 +1,2 @@
+class ProjectMixins(object):
+    pass

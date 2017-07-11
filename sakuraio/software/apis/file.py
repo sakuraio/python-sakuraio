@@ -1,0 +1,2 @@
+class FileMixins(object):
+    pass

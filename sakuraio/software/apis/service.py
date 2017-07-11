@@ -1,0 +1,2 @@
+class ServiceMixins(object):
+    pass

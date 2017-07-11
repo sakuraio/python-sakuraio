@@ -1,0 +1,2 @@
+class ModuleMixins(object):
+    pass
