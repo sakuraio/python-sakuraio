@@ -17,6 +17,16 @@ class SakuraIOClient(object):
             self.base_url = base_url
 
     def do(self, method, path, url_params={}, query_params={}, request_params={}):
+        """Request wrapper
+
+        :param string method:
+            HTTP Mehod. ``GET`` or ``POST``.
+
+        :param string path:
+            Path of URL.
+
+        :return: API response (format JSON)
+        """
         headers = {}
         headers["Accept"] = 'application/json'
         auth = (self.api_token, self.api_secret)
@@ -43,3 +53,8 @@ class SakuraIOClient(object):
             raise Exception('[ERROR] Unsupported Method')
 
         return response.json()
+
+    def auth(self):
+        """Test authentication
+        """
+        return self.do('GET', 'auth')
