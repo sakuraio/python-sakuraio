@@ -2,7 +2,7 @@ import requests
 
 
 class SakuraIOClient(object):
-    base_url = 'https://api.sakura.io/'
+    base_url = 'https://api.sakura.io/v1/'
     api_token = None
     api_secret = None
 
@@ -16,16 +16,30 @@ class SakuraIOClient(object):
         if base_url is not None:
             self.base_url = base_url
 
-    def do(self, method, url, url_params={}, query_params={}, request_params={}):
+    def do(self, method, path, url_params={}, query_params={}, request_params={}):
         headers = {}
-        headers["authorization"] = "Basic " + (self.api_token + ":" + self.api_secret).encode("base64")[:-1]
         headers["Accept"] = 'application/json'
-        url = url.lstrip('/')
-        _url = self.base_url + url
+        auth = (self.api_token, self.api_secret)
+        _url = self.base_url + path
 
         method = method.lower()
         response = None
         if method == 'get':
-            response = requests.get(_url, params=query_params)
+            response = requests.get(
+                _url,
+                params=query_params,
+                headers=headers,
+                auth=auth
+                )
+        elif method == 'post':
+            response = requests.post(
+                _url,
+                params=query_params,
+                data=request_params,
+                headers=headers,
+                auth=auth
+                )
+        else:
+            raise Exception('[ERROR] Unsupported Method')
 
         return response.json()
