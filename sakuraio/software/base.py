@@ -51,6 +51,20 @@ class SakuraIOClient(APIMixins):
                 headers=headers,
                 auth=auth
                 )
+        elif method == 'delete':
+            response = requests.delete(
+                _url,
+                headers=headers,
+                auth=auth
+                )
+        elif method == 'put':
+            response = requests.put(
+                _url,
+                param=query_params,
+                json=request_params,
+                headers=headers,
+                auth=auth
+                )
         else:
             raise Exception('[ERROR] Unsupported Method')
 
