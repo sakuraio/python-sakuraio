@@ -22,7 +22,7 @@ http://python-sakuraio.readthedocs.io/
 
 ## For Hardware
 
-It currently supports I2C (SMBus) ONLY, and tested with Raspberry Pi.
+It currently tested with Raspberry Pi only.
 
 ### Requirements
 
@@ -31,12 +31,14 @@ It currently supports I2C (SMBus) ONLY, and tested with Raspberry Pi.
 * Python = 2.7
 * python-smbus (for I2C)
 * python-rpi.gpio (for GPIO on Raspberry Pi)
+* python-serial (for Serial)
 
 #### Python3
 
 * Python >= 3.4
 * python3-smbus (for I2C)
 * python3-rpi.gpio (for GPIO on Raspberry Pi)
+* python3-serial (for Serial)
 
 ### Install
 
@@ -75,6 +77,20 @@ from sakuraio.hardware.rpi import SakuraIOGPIO
 sakuraio = SakuraIOGPIO()
 print(sakuraio.get_unique_id())
 ```
+
+
+### Serial (UART)
+
+```python
+from sakuraio.hardware.rpi import SakuraIOSerial
+
+sakuraio = SakuraIOSerial("/dev/ttyS0")
+print(sakuraio.get_unique_id())
+```
+
+*NOTE*
+
+Disable serial console by using `raspi-config`.
 
 
 #### output
