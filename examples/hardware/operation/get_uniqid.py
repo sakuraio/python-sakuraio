@@ -3,6 +3,16 @@ import time
 
 sakuraio = SakuraIOGPIO()
 
-print(sakuraio.get_unique_id())
+try:
+    unique_id = sakuraio.get_unique_id()
+    print(unique_id)
+except:
+    raise Exception()
+
 time.sleep(3)
-print(sakuraio.get_firmware_version())
+
+try:
+    firm_version = sakuraio.get_firmware_version()
+    print(firm_version)
+except:
+    raise Exception()
