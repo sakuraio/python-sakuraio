@@ -92,7 +92,7 @@ class SakuraIOSerial(SakuraIOBase):
     def readline(self):
         line = ""
         while True:
-            c = self.serial.read().decode("ascii")
+            c = self.serial.read().decode("ascii", "ignore")
             if not c:
                 return line
 
