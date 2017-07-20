@@ -2,13 +2,12 @@
 # -*- coding: utf-8 -*-
 import sys
 import time
-#import struct
 from datetime import datetime
 from sakuraio.hardware.rpi import SakuraIOGPIO
-#from sakuraio.hardware.rpi import SakuraIOSMBus
 
 FILEID = 1
 FILENAME = "downloaded_file"
+
 
 def get_file_via_sakuraio(channel):
     """ Single file downlod function. """
@@ -20,7 +19,6 @@ def get_file_via_sakuraio(channel):
 
     # インスタンス作成
     sakuraio = SakuraIOGPIO()
-    #sakuraio = SakuraIOSMBus
 
     # 一連のファイルダウンロード処理を開始(センター側でダウンロードファイルを取得)
     sakuraio.start_file_download([channel])
@@ -31,9 +29,9 @@ def get_file_via_sakuraio(channel):
     try:
         response = sakuraio.get_file_metadata()
     except:
-        #sakuraio.cancel_file_download()
-        #del sakuraio
-        #sys.exit()
+        # sakuraio.cancel_file_download()
+        # del sakuraio
+        # sys.exit()
         raise
     else:
         print('Get_file_metadata: Status: {0:x}'.format(response["status"]))
@@ -45,16 +43,16 @@ def get_file_via_sakuraio(channel):
         filesize = response["size"]
         print('Get_file_metadata: Filesize: {0}'.format(filesize))
         print('Get_file_metadata: Timestamp: {0}'.format(datetime.utcfromtimestamp(response["timestamp"]/1000)))
-    
+
     # ファイルの実体を取得
     while receivedsize < filesize:
         time.sleep(DELAY_SEC)
         try:
             result = sakuraio.get_file_data(CHUNK_SIZE)
         except:
-            #sakuraio.cancel_file_download()
-            #del sakuraio
-            #sys.exit()
+            # sakuraio.cancel_file_download()
+            # del sakuraio
+            # sys.exit()
             raise
         else:
             filedata.extend(result["data"])
@@ -62,11 +60,11 @@ def get_file_via_sakuraio(channel):
             print('Get_file_data: Length: {0}'.format(len(result["data"])))
             print('Get_file_data: Receivedsize: {0}'.format(receivedsize))
 
-    #print('Get_file_data: Received_data: {0}'.format(filedata))
+    # print('Get_file_data: Received_data: {0}'.format(filedata))
 
     del sakuraio
-
     return filedata
+
 
 if __name__ == "__main__":
 
