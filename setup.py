@@ -4,7 +4,7 @@ from distutils.core import setup
 
 setup(
     name='SakuraIO',
-    version='0.1.3',
+    version='0.1.4',
     description='Python SakuraIO Library',
     author='chibiegg',
     author_email='chibiegg@chibiegg.net',
