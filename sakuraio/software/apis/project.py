@@ -36,9 +36,7 @@ class ProjectMixins(object):
                        url_params={"project_id": project_id}
                        )
 
-    def update_project(self, project_id, name, datastore, location):
-        if validate_datastore(datastore) is not True:
-            raise UnSupportedExceptions('datastore', datastore)
+    def update_project(self, project_id, name, location):
         if validate_location(location) is not True:
             raise UnSupportedExceptions('location', location)
 
@@ -46,7 +44,6 @@ class ProjectMixins(object):
                        url_params={"project_id": project_id},
                        request_params={
                           'name': name,
-                          'datastore': datastore,
                           'location': location
                        }
                        )
