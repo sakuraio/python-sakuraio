@@ -3,7 +3,7 @@ from sakuraio.software.utils import valicate_sort, validate_datastore, validate_
 
 
 class ProjectMixins(object):
-    def get_projects(self, name=None, sort=None):
+    def show_projects(self, name=None, sort=None):
         # validate sort option
         if valicate_sort(sort) is not False:
             raise UnSupportedExceptions('sort', sort)
