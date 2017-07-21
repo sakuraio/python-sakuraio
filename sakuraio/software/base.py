@@ -2,6 +2,10 @@ import requests
 from sakuraio.software.apis import APIMixins
 
 
+# Please check bottom of API docs.
+API_VERSION = "1.0.3"
+
+
 class SakuraIOClient(APIMixins):
     base_url = 'https://api.sakura.io/v1/'
     api_token = None
