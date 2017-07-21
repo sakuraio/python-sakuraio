@@ -28,12 +28,12 @@ class ProjectMixins(object):
 
     def delete_project(self, project_id):
         return self.do('DELETE', 'projects/{project_id}',
-                       url_params={"project_id": project_id}
+                       url_params={'project_id': project_id}
                        )
 
     def show_project(self, project_id):
         return self.do('GET', 'projects/{project_id}',
-                       url_params={"project_id": project_id}
+                       url_params={'project_id': project_id}
                        )
 
     def update_project(self, project_id, name, location):
@@ -41,7 +41,7 @@ class ProjectMixins(object):
             raise UnSupportedExceptions('location', location)
 
         return self.do('PUT', 'projects/{project_id}',
-                       url_params={"project_id": project_id},
+                       url_params={'project_id': project_id},
                        request_params={
                           'name': name,
                           'location': location
