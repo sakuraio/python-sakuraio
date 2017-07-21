@@ -1,11 +1,11 @@
 from sakuraio.software.exceptions import UnSupportedExceptions
-from sakuraio.software.utils import valicate_sort, validate_datastore, validate_location
+from sakuraio.software.utils import validate_sort_project, validate_datastore, validate_location
 
 
 class ProjectMixins(object):
     def show_projects(self, name=None, sort=None):
         # validate sort option
-        if valicate_sort(sort) is not False:
+        if validate_sort_project(sort) is not False:
             raise UnSupportedExceptions('sort', sort)
 
         return self.do('GET', 'projects',

@@ -1,5 +1,5 @@
-def valicate_sort(value):
-    sort_options = ['', 'name', 'id', '-name', '-id']
+def validate_sort_project(value):
+    sort_options = [None, '', 'name', 'id', '-name', '-id']
     if value not in sort_options:
         return False
 
