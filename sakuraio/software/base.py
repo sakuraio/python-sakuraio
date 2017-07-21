@@ -61,7 +61,7 @@ class SakuraIOClient(APIMixins):
         elif method == 'put':
             response = requests.put(
                 _url,
-                param=query_params,
+                params=query_params,
                 json=request_params,
                 headers=headers,
                 auth=auth
