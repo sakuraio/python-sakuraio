@@ -49,11 +49,12 @@ class ServiceMixins(object):
                            }
                        )
 
-    def update_service(self, service_id):
-        return self.do('GET', 'services/{service_id}',
+    def update_service(self, service_id, **kargs):
+        return self.do('PUT', 'services/{service_id}',
                        url_params={
                            'service_id': service_id
-                           }
+                           },
+                       request_params=kargs
                        )
 
     def delete_service(self, service_id):
