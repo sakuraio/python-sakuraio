@@ -1,7 +1,7 @@
 import struct
 import datetime
 
-from .utils import pack
+from .utils import pack, value_to_bytes
 
 # Transmit
 CMD_TX_ENQUEUE = 0x20
@@ -11,24 +11,6 @@ CMD_TX_CLEAR = 0x23
 CMD_TX_SEND = 0x24
 CMD_TX_STAT = 0x25
 
-def value_to_bytes(value):
-    """Convert value to raw values.
-
-    :param value:
-        Value to Convert
-    :type value: integer or float
-
-    :return: Tuple of `Type` string and `Value` list
-    :rtype: (str, list)
-    """
-
-    if isinstance(value, float):
-        return ("d", pack("<d", value))
-
-    if isinstance(value, int):
-        return ("l", pack("<q", value))
-
-    raise ValueError("Unsupported Type %s", value.__class__)
 
 class TransmitMixins(object):
 
@@ -89,7 +71,7 @@ class TransmitMixins(object):
 
         :param value:
             value to enqueue.
-        :type value: integer or float
+        :type value: integer, float, str or bytes
 
         :params int offset:
             Time offset in ms. Default ``0``. It must be less than or equal ``0``.
@@ -105,7 +87,7 @@ class TransmitMixins(object):
 
         :param value:
             value to enqueue.
-        :type value: integer or float
+        :type value: integer, float, str or bytes
         """
         t, data = value_to_bytes(value)
         self.send_immediate_raw(channel, t, data)

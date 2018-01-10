@@ -20,3 +20,28 @@ def pack(fmt, *args):
         return result
     else:
         TypeError()
+
+def value_to_bytes(value):
+    """Convert value to raw values.
+
+    :param value:
+        Value to Convert
+    :type value: integer, float, str or bytes
+
+    :return: Tuple of `Type` string and `Value` list
+    :rtype: (str, list)
+    """
+
+    if isinstance(value, float):
+        return ("d", pack("<d", value))
+
+    if isinstance(value, int):
+        return ("l", pack("<q", value))
+
+    if isinstance(value, str):
+        return ("b", (list(value.encode("utf-8"))+[0x00]*8)[:8])
+
+    if isinstance(value, bytes):
+        return ("b", (list(value)+[0x00]*8)[:8])
+
+    raise ValueError("Unsupported Type %s", value.__class__)

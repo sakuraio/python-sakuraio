@@ -3,7 +3,7 @@ import datetime
 
 from sakuraio.hardware.base import calc_parity
 from sakuraio.hardware.commands import *
-from sakuraio.hardware.commands.transmit import value_to_bytes
+from sakuraio.hardware.commands.utils import value_to_bytes
 from sakuraio.hardware.dummy import DummySakuraIO
 from sakuraio.hardware.exceptions import CommandError, ParityError
 
@@ -17,11 +17,6 @@ class CommandTest(unittest.TestCase):
         sakuraio.initial(payload)
 
         return sakuraio
-
-    def test_value_to_bytes(self):
-        self.assertEqual(value_to_bytes(0x12345678), ('l', [0x78, 0x56, 0x34, 0x12, 0x00, 0x00, 0x00, 0x00]))
-        self.assertEqual(value_to_bytes(-1), ('l', [255, 255, 255, 255, 255, 255, 255, 255]))
-        self.assertEqual(value_to_bytes(3.14), ('d', [31, 133, 235, 81, 184, 30, 9, 64]))
 
     def test_get_datetime(self):
         sakuraio = self._initial(0x01, [48, 78, 218, 39, 91, 1, 0, 0])
