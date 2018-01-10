@@ -4,10 +4,10 @@ from distutils.core import setup
 
 setup(
     name='SakuraIO',
-    version='0.1.4',
-    description='Python SakuraIO Library',
+    version='0.1.5',
+    description='Python sakura.io Library',
     author='chibiegg',
-    author_email='chibiegg@chibiegg.net',
+    author_email='y-egusa@sakura.ad.jp',
     url='https://github.com/sakuraio/python-sakuraio/',
     packages=['sakuraio', 'sakuraio.hardware', 'sakuraio.hardware.commands', 'sakuraio.hardware.rpi'],
     classifiers=[
