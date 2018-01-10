@@ -1,5 +1,5 @@
 import struct
-
+import platform
 
 def pack(fmt, *args):
     """pack() is wrapper of struct.pack
@@ -39,7 +39,13 @@ def value_to_bytes(value):
         return ("l", pack("<q", value))
 
     if isinstance(value, str):
-        return ("b", (list(value.encode("utf-8"))+[0x00]*8)[:8])
+        if platform.python_version_tuple()[0] == "2":
+            result = []
+            for c in value.encode("utf-8"):
+                result.append(ord(c))
+            return ("b", (result+[0x00]*8)[:8])
+        else:
+            return ("b", (list(value.encode("utf-8"))+[0x00]*8)[:8])
 
     if isinstance(value, bytes):
         return ("b", (list(value)+[0x00]*8)[:8])
