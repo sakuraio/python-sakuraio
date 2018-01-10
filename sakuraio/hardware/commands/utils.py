@@ -36,7 +36,12 @@ def value_to_bytes(value):
         return ("d", pack("<d", value))
 
     if isinstance(value, int):
+        if value > 9223372036854775807:
+            return ("L", pack("<Q", value))
         return ("l", pack("<q", value))
+
+    if platform.python_version_tuple()[0] == "2" and isinstance(value, long):
+        return ("L", pack("<Q", value))
 
     if isinstance(value, str):
         if platform.python_version_tuple()[0] == "2":
