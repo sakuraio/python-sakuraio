@@ -16,7 +16,9 @@ Transmit
 --------
 
 .. automethod:: hardware.commands.transmit.TransmitMixins.enqueue_tx_raw(channel, type, data, offset=0)
+.. automethod:: hardware.commands.transmit.TransmitMixins.enqueue_tx(channel, value, offset=0)
 .. automethod:: hardware.commands.transmit.TransmitMixins.send_immediate_raw(channel, type, data)
+.. automethod:: hardware.commands.transmit.TransmitMixins.send_immediate(channel, value)
 .. automethod:: hardware.commands.transmit.TransmitMixins.get_tx_queue_length()
 .. automethod:: hardware.commands.transmit.TransmitMixins.clear_tx()
 .. automethod:: hardware.commands.transmit.TransmitMixins.send()
