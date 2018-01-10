@@ -85,6 +85,39 @@ class CommandTest(unittest.TestCase):
         sakuraio.clear_rx()
         self.assertEqual(sakuraio.values, [CMD_RX_CLEAR, 0, CMD_RX_CLEAR])
 
+    def test_start_file_download(self):
+        sakuraio = self._initial(0x01, [])
+        sakuraio.start_file_download(1)
+        self.assertEqual(sakuraio.values, [CMD_START_FILE_DOWNLOAD, 2, 0x01, 0x00, 67])
+
+        # for Compatibility
+        sakuraio = self._initial(0x01, [])
+        sakuraio.start_file_download([1])
+        self.assertEqual(sakuraio.values, [CMD_START_FILE_DOWNLOAD, 2, 0x01, 0x00, 67])
+
+    def test_get_file_download_status(self):
+        sakuraio = self._initial(0x01, [0, 0x01, 0x02, 0x03, 0x04])
+        result = sakuraio.get_file_download_status()
+        self.assertEqual(sakuraio.values, [CMD_GET_FILE_DOWNLOAD_STATUS, 0, CMD_GET_FILE_DOWNLOAD_STATUS])
+        self.assertEqual(result, {'status': 0, 'size': 0x04030201})
+
+    def test_cancel_file_download(self):
+        sakuraio = self._initial(0x01, [])
+        result = sakuraio.cancel_file_download()
+        self.assertEqual(sakuraio.values, [CMD_CANCEL_FILE_DOWNLOAD, 0, CMD_CANCEL_FILE_DOWNLOAD])
+
+    def test_get_file_data(self):
+        sakuraio = self._initial(0x01, [0x01, 0x02, 0x03, 0x04, 0x05])
+        result = sakuraio.get_file_data(128)
+        self.assertEqual(sakuraio.values, [CMD_GET_FILE_DATA, 1, 128, 197])
+        self.assertEqual(result, [0x01, 0x02, 0x03, 0x04, 0x05])
+
+        # for Compatibility
+        sakuraio = self._initial(0x01, [0x01, 0x02, 0x03, 0x04, 0x05])
+        result = sakuraio.get_file_data([128])
+        self.assertEqual(sakuraio.values, [CMD_GET_FILE_DATA, 1, 128, 197])
+        self.assertEqual(result, {"data":[0x01, 0x02, 0x03, 0x04, 0x05]})
+
     def test_get_product_id(self):
         sakuraio = self._initial(0x01, [0x02, 0x00])
         self.assertEqual(sakuraio.get_product_id(), 2)
