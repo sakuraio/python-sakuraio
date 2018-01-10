@@ -3,9 +3,9 @@ import datetime
 
 from sakuraio.hardware.base import calc_parity
 from sakuraio.hardware.commands import *
+from sakuraio.hardware.commands.utils import value_to_bytes
 from sakuraio.hardware.dummy import DummySakuraIO
 from sakuraio.hardware.exceptions import CommandError, ParityError
-
 
 class CommandTest(unittest.TestCase):
 
@@ -40,10 +40,20 @@ class CommandTest(unittest.TestCase):
         sakuraio.enqueue_tx_raw(1, "i", [0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08], -4321)
         self.assertEqual(sakuraio.values, [CMD_TX_ENQUEUE, 18, 1, 105, 1, 2, 3, 4, 5, 6, 7, 8, 31, 239, 255, 255, 255, 255, 255, 255, 162])
 
+    def test_enqueue_tx(self):
+        sakuraio = self._initial(0x01, [])
+        sakuraio.enqueue_tx(1, 0x0807060504030201)
+        self.assertEqual(sakuraio.values, [CMD_TX_ENQUEUE, 10, 1, 108, 1, 2, 3, 4, 5, 6, 7, 8, 79])
+
     def test_send_immediate_raw(self):
         sakuraio = self._initial(0x01, [])
         sakuraio.send_immediate_raw(1, "i", [0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08])
         self.assertEqual(sakuraio.values, [CMD_TX_SENDIMMED, 10, 1, 105, 1, 2, 3, 4, 5, 6, 7, 8, 75])
+
+    def test_send_immediate_raw(self):
+        sakuraio = self._initial(0x01, [])
+        sakuraio.send_immediate(1, 0x0807060504030201)
+        self.assertEqual(sakuraio.values, [CMD_TX_SENDIMMED, 10, 1, 108, 1, 2, 3, 4, 5, 6, 7, 8, 78])
 
     def test_get_tx_queue_length(self):
         sakuraio = self._initial(0x01, [23, 14])

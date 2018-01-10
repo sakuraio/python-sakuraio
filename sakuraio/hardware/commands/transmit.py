@@ -1,7 +1,7 @@
 import struct
 import datetime
 
-from .utils import pack
+from .utils import pack, value_to_bytes
 
 # Transmit
 CMD_TX_ENQUEUE = 0x20
@@ -62,6 +62,35 @@ class TransmitMixins(object):
 
         request = [channel, ord(type)] + data[:8]
         self.execute_command(CMD_TX_SENDIMMED, request)
+
+    def enqueue_tx(self, channel, value, offset=0):
+        """Enqueue channel data by value.
+
+        :param int channel:
+            Channel number of data. Must be 0 to 127.
+
+        :param value:
+            value to enqueue.
+        :type value: integer, float, str or bytes
+
+        :params int offset:
+            Time offset in ms. Default ``0``. It must be less than or equal ``0``.
+        """
+        t, data = value_to_bytes(value)
+        self.enqueue_tx_raw(channel, t, data, offset)
+
+    def send_immediate(self, channel, value):
+        """Send channel data immediately by value.
+
+        :param int channel:
+            Channel number of data. Must be 0 to 127.
+
+        :param value:
+            value to enqueue.
+        :type value: integer, float, str or bytes
+        """
+        t, data = value_to_bytes(value)
+        self.send_immediate_raw(channel, t, data)
 
     def get_tx_queue_length(self):
         """Get available and queued length of tramsmit queue.
