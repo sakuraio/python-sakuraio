@@ -11,6 +11,14 @@ CMD_TX_CLEAR = 0x23
 CMD_TX_SEND = 0x24
 CMD_TX_STAT = 0x25
 
+def value_to_bytes(value):
+    if isinstance(value, float):
+        return ("d", pack("<d", value))
+
+    if isinstance(value, int):
+        return ("l", pack("<q", value))
+
+    raise ValueError("Unsupported Type")
 
 class TransmitMixins(object):
 

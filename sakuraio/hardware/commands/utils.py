@@ -16,6 +16,7 @@ def pack(fmt, *args):
         return result
     elif isinstance(value, bytes):
         # For Python3
-        return value
+        result += value
+        return result
     else:
         TypeError()
