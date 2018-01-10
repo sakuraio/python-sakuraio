@@ -12,13 +12,23 @@ CMD_TX_SEND = 0x24
 CMD_TX_STAT = 0x25
 
 def value_to_bytes(value):
+    """Convert value to raw values.
+
+    :param value:
+        Value to Convert
+    :type value: integer or float
+
+    :return: Tuple of `Type` string and `Value` list
+    :rtype: (str, list)
+    """
+
     if isinstance(value, float):
         return ("d", pack("<d", value))
 
     if isinstance(value, int):
         return ("l", pack("<q", value))
 
-    raise ValueError("Unsupported Type")
+    raise ValueError("Unsupported Type %s", value.__class__)
 
 class TransmitMixins(object):
 
@@ -70,6 +80,35 @@ class TransmitMixins(object):
 
         request = [channel, ord(type)] + data[:8]
         self.execute_command(CMD_TX_SENDIMMED, request)
+
+    def enqueue_tx(self, channel, value, offset=0):
+        """Enqueue channel data by value.
+
+        :param int channel:
+            Channel number of data. Must be 0 to 127.
+
+        :param value:
+            value to enqueue.
+        :type value: integer or float
+
+        :params int offset:
+            Time offset in ms. Default ``0``. It must be less than or equal ``0``.
+        """
+        t, data = value_to_bytes(value)
+        self.enqueue_tx_raw(channel, t, data, offset)
+
+    def send_immediate(self, channel, value):
+        """Send channel data immediately by value.
+
+        :param int channel:
+            Channel number of data. Must be 0 to 127.
+
+        :param value:
+            value to enqueue.
+        :type value: integer or float
+        """
+        t, data = value_to_bytes(value)
+        self.send_immediate_raw(channel, t, data)
 
     def get_tx_queue_length(self):
         """Get available and queued length of tramsmit queue.
