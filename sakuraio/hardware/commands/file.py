@@ -14,13 +14,16 @@ class FileMixins(object):
     def start_file_download(self, fileid):
         """Start file download
 
-        :param list fileid:
-            FileID. List length must be 1, the Value fileid[0] must be 1 to 5.
+        :param integer fileid:
+            FileID of start to download, must be 1 to 5.
 
         """
 
-        fileid += [0x00] * 2
-        self.execute_command(CMD_START_FILE_DOWNLOAD, fileid[:2])
+        if isinstance(fileid, list):
+            # for Compatibility
+            fileid = fileid[0]
+
+        self.execute_command(CMD_START_FILE_DOWNLOAD, [fileid, 0x00])
 
     def get_file_metadata(self):
         """Get file metadata
@@ -58,11 +61,25 @@ class FileMixins(object):
     def get_file_data(self, rsize):
         """Get file data
 
-        :return: Dict of download file body.abs
-        :rtype: dict
+        :param integer rsize:
+            Max receive size, must be 1 to 255.
+
+        :return: Part of data
+        :rtype: list
         """
 
-        response = self.execute_command(CMD_GET_FILE_DATA, rsize[0:1])
-        return {
-            "data": response[0:]
-        }
+        is_old_style = False
+
+        if isinstance(rsize, list):
+            rsize = rsize[0]
+            is_old_style = True
+
+        if rsize <= 0 or rsize > 255:
+            raise ValueError("Invalid rsize %d", rsize)
+
+        response = self.execute_command(CMD_GET_FILE_DATA, [rsize])
+        if is_old_style:
+            return {
+                "data": response[0:]
+            }
+        return response
