@@ -5,7 +5,7 @@ from sakuraio.software.utils import validate_sort_project, validate_datastore, v
 class ProjectMixins(object):
     def show_projects(self, name=None, sort=None):
         # validate sort option
-        if validate_sort_project(sort) is not False:
+        if not validate_sort_project(sort):
             raise UnSupportedExceptions('sort', sort)
 
         return self.do('GET', 'projects',
