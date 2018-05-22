@@ -4,12 +4,19 @@ from distutils.core import setup
 
 setup(
     name='SakuraIO',
-    version='0.1.5',
+    version='0.1.6',
     description='Python sakura.io Library',
     author='chibiegg',
     author_email='y-egusa@sakura.ad.jp',
     url='https://github.com/sakuraio/python-sakuraio/',
-    packages=['sakuraio', 'sakuraio.hardware', 'sakuraio.hardware.commands', 'sakuraio.hardware.rpi'],
+    packages=[
+        'sakuraio',
+        'sakuraio.hardware',
+        'sakuraio.hardware.commands',
+        'sakuraio.hardware.rpi',
+        'sakuraio.software',
+        'sakuraio.software.apis'
+    ],
     classifiers=[
         # How mature is this project? Common values are
         #   3 - Alpha
