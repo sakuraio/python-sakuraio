@@ -10,6 +10,9 @@ CMD_UPDATE_FIRMWARE = 0xA9
 CMD_GET_FIRMWARE_UPDATE_STATUS = 0xAA
 CMD_SOFTWARE_RESET = 0xAF
 
+CMD_SET_POWER_SAVE_MODE = 0xB0
+CMD_GET_POWER_SAVE_MODE = 0xB1
+
 UNLOCK_MAGIC_NUMBERS = [0x53, 0x6B, 0x72, 0x61]
 
 
@@ -21,6 +24,9 @@ PRODUCT_ID_MAP = {
     PRODUCT_ID_SCM_LTE_01: "SCM-LTE-01",
 }
 
+POWER_SAVE_MODE_DISABLE = 0
+POWER_SAVE_MODE_AUTO_SLEEP = 1
+POWER_SAVE_MODE_RF_OFF = 2
 
 class OperationMixins(object):
 
@@ -90,3 +96,30 @@ class OperationMixins(object):
         """Request software reset"""
 
         self.execute_command(CMD_SOFTWARE_RESET)
+
+    def set_power_save_mode(self, mode):
+        """Set PowerSaveMode
+
+        :param integer mode:
+            Power Save Mode number.
+            0: Disable mode.
+            1: Auto sleep mode. 
+            2: Rf off mode.
+        """
+        self.execute_command(CMD_SET_POWER_SAVE_MODE, [mode])
+
+    def get_power_save_mode(self):
+        """Get PowerSaveMode
+
+        :rtype: int
+            Power Save Mode number.
+            0: Disable mode.
+            1: Auto sleep mode. 
+            2: Rf off mode.
+        """
+        ret = self.execute_command(CMD_GET_POWER_SAVE_MODE)
+        if isinstance(ret, list):
+            if len(ret) == 1:
+                return ret[0]
+        return None
+
