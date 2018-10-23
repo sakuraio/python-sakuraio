@@ -1,5 +1,6 @@
 import datetime
 import struct
+import time
 
 from sakuraio.hardware.commands import CommandMixins, CMD_ERROR_NONE
 from sakuraio.hardware.exceptions import CommandError, ParityError
@@ -15,6 +16,7 @@ def calc_parity(values):
 
 
 class SakuraIOBase(CommandMixins):
+    response_wait_time = 0.01
 
     def start(self, write=True):
         return
@@ -39,6 +41,9 @@ class SakuraIOBase(CommandMixins):
             self.start(True)
             for value in request:
                 self.send_byte(value)
+
+            # wait response
+            time.sleep(self.response_wait_time)
 
             # Response
             self.start(False)
