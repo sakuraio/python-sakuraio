@@ -1,11 +1,13 @@
 from sakuraio.hardware.base import SAKURAIO_SLAVE_ADDR, SakuraIOBase
+import time
 
 
 class SakuraIOSMBus(SakuraIOBase):
 
-    def __init__(self):
+    def __init__(self, response_wait_time=0.01):
         import smbus
         self.bus = smbus.SMBus(1)
+        self.response_wait_time = response_wait_time
 
     def start(self, write=True):
         if write:
@@ -14,6 +16,10 @@ class SakuraIOSMBus(SakuraIOBase):
         else:
             if self.request:
                 self.bus.write_i2c_block_data(SAKURAIO_SLAVE_ADDR, self.request[0], self.request[1:])
+            
+            # wait response
+            time.sleep(self.response_wait_time)
+
             self.response = self.bus.read_i2c_block_data(SAKURAIO_SLAVE_ADDR, 32)
 
     def send_byte(self, value):
@@ -28,7 +34,7 @@ class SakuraIOSMBus(SakuraIOBase):
 
 class SakuraIOGPIO(SakuraIOBase):
 
-    def __init__(self, miso=9, mosi=10, clk=11, cs=8):
+    def __init__(self, miso=9, mosi=10, clk=11, cs=8, response_wait_time=0.01):
         from RPi import GPIO
         self.GPIO = GPIO
         self.miso = miso
@@ -43,6 +49,8 @@ class SakuraIOGPIO(SakuraIOBase):
 
         self.GPIO.output(self.cs, self.GPIO.HIGH)
         self.GPIO.output(self.clk, self.GPIO.LOW)
+        
+        self.response_wait_time = response_wait_time
 
     def start(self, write=True):
         self.GPIO.output(self.cs, self.GPIO.LOW)
@@ -82,9 +90,10 @@ class SakuraIOSPI(SakuraIOBase):
 
 class SakuraIOSerial(SakuraIOBase):
 
-    def __init__(self, port, baudrate=115200):
+    def __init__(self, port, baudrate=115200, response_wait_time=0.01):
         import serial
         self.serial = serial.Serial(port, baudrate, timeout=1)
+        self.response_wait_time = response_wait_time
 
     def __del__(self):
         self.serial.close()
