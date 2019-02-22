@@ -64,10 +64,11 @@ print(sakuraio.get_unique_id())
 
 *NOTE*
 
-DO NOT update linux kernel from `Linux raspberrypi 4.4.50-v7+`.
+Some linux kernel version of raspbian are not supported.
 
 It is reported that `OSError: [Errno 121] Remote I/O error` occurs with later version.
 
+Please see [the document of this HAT](https://sakura.io/developer/pdf/sco-rpi-01_manual_v1.0.1.pdf).
 
 #### SPI (GPIO)
 
